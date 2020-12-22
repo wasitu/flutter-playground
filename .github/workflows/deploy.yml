@@ -17,6 +17,7 @@ jobs:
         channel: 'beta'
     - name: Run a flutter build
       run: |
+        cd web
         flutter config --enable-web
         flutter pub get
         flutter build web
