@@ -25,4 +25,4 @@ jobs:
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         publish_branch: pages
-        publish_dir: ./build/web
+        publish_dir: ./web/build/web
