@@ -14,14 +14,13 @@ jobs:
     - uses: actions/checkout@master
     - uses: subosito/flutter-action@v1
       with:
-        channel: 'beta'
-    - name: Run a flutter build
+        channel: 'stable'
+    - name: Build
       run: |
         cd web
-        flutter config --enable-web
         flutter pub get
         flutter build web
-    - name: Deploy to github pages
+    - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
