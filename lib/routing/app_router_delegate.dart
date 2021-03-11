@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/routing/app_page.dart';
 
+import '../utility.dart';
+
 class AppRouterDelegate extends RouterDelegate<String>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<String> {
   final _stack = <String>[];
@@ -49,7 +51,9 @@ class AppRouterDelegate extends RouterDelegate<String>
   Future<void> setNewRoutePath(String configuration) {
     _stack
       ..clear()
-      ..add(configuration);
+      ..add('/');
+    final replaced = configuration.replaceFirst('/', '');
+    if (replaced.isNotEmpty) _stack.addAll(replaced.split('/').toList());
     return SynchronousFuture<void>(null);
   }
 

@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
         child: TextButton(
           child: Text('DETAIL 1'),
           onPressed: () {
-            AppRouterDelegate.of(context).push('details/1');
+            AppRouterDelegate.of(context).push('details#1');
           },
         ),
       ),

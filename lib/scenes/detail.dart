@@ -20,7 +20,7 @@ class Detail extends StatelessWidget {
             TextButton(
               child: Text('DETAIL 2'),
               onPressed: () {
-                AppRouterDelegate.of(context).push('details/2');
+                AppRouterDelegate.of(context).push('details#2');
               },
             ),
             TextButton(
