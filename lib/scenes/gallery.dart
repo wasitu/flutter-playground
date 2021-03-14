@@ -24,12 +24,17 @@ class Gallery extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done)
                     return CircularProgressIndicator();
-                  return Wrap(
-                    spacing: 16,
-                    children: snapshot.data?.map((e) {
-                          return buildPhotoWidget(e);
-                        }).toList() ??
-                        [],
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
+                    child: Wrap(
+                      spacing: 16,
+                      runSpacing: 16,
+                      children: snapshot.data?.map((e) {
+                            return buildPhotoWidget(e);
+                          }).toList() ??
+                          [],
+                    ),
                   );
                 },
               ),
