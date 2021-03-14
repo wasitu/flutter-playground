@@ -35,10 +35,6 @@ dependencies:
   firebase_storage: ^8.0.0
   cloud_firestore: ^1.0.1
 
-  recase:
-    git:
-      url: https://github.com/techniboogie-dart/recase
-
 dev_dependencies:
   flutter_test:
     sdk: flutter  
