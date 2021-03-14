@@ -25,6 +25,7 @@ class AppRouterDelegate extends RouterDelegate<String>
     return MaterialPageRoute(
       settings: settings,
       builder: (BuildContext context) {
+        print(settings.name);
         if (settings.name == '/') return Home();
         if (settings.name == (Gallery).toString().snakeCase) return Gallery();
         if (settings.name == (FirebaseTest).toString().snakeCase)
