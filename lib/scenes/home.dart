@@ -30,6 +30,13 @@ class Home extends StatelessWidget {
             ),
             buildMenuItem(
               context: context,
+              text: 'FIREBASE TEST',
+              callback: () {
+                AppRouterDelegate.of(context).push('firebase_test');
+              },
+            ),
+            buildMenuItem(
+              context: context,
               text: 'GALLERY',
               callback: () {
                 AppRouterDelegate.of(context).push('gallery');
