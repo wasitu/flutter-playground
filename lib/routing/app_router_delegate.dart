@@ -1,8 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/routing/app_page.dart';
+import 'package:flutter_playground/scenes/detail.dart';
+import 'package:flutter_playground/scenes/gallery.dart';
+import 'package:flutter_playground/scenes/home.dart';
+import 'package:flutter_playground/scenes/test/firebase_test.dart';
+import 'package:flutter_playground/scenes/unknown.dart';
 
-import '../utility.dart';
+import 'package:recase/recase.dart';
 
 class AppRouterDelegate extends RouterDelegate<String>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<String> {
@@ -14,11 +19,24 @@ class AppRouterDelegate extends RouterDelegate<String>
     return delegate as AppRouterDelegate;
   }
 
-  AppRouterDelegate({
-    required this.onGenerateRoute,
-  });
+  AppRouterDelegate();
 
-  final RouteFactory onGenerateRoute;
+  final RouteFactory onGenerateRoute = (RouteSettings settings) {
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (BuildContext context) {
+        if (settings.name == '/') return Home();
+        if (settings.name == (Gallery).toString().snakeCase) return Gallery();
+        if (settings.name == (FirebaseTest).toString().snakeCase)
+          return FirebaseTest();
+        if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
+          final id = settings.name?.split('#').last;
+          return Detail(id: id);
+        }
+        return Unknown();
+      },
+    );
+  };
 
   @override
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

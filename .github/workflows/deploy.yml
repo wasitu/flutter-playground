@@ -19,7 +19,7 @@ jobs:
       run: |
         cd web
         flutter pub get
-        flutter build web
+        flutter build web --web-renderer html
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:

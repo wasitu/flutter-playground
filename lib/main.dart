@@ -1,37 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/scenes/detail.dart';
-import 'package:flutter_playground/scenes/home.dart';
-import 'package:flutter_playground/scenes/unknown.dart';
-import 'package:flutter_playground/utility.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 
 import 'routing/app_route_information_parser.dart';
 import 'routing/app_router_delegate.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final AppRouterDelegate _routerDelegate = AppRouterDelegate(
-    onGenerateRoute: (RouteSettings settings) {
-      return MaterialPageRoute(
-        settings: settings,
-        builder: (BuildContext context) {
-          sprint(settings.name ?? '');
-          switch (settings.name) {
-            case '/':
-              return Home();
-            default:
-              if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
-                final id = settings.name?.split('#').last;
-                return Detail(id: id);
-              }
-              return Unknown();
-          }
-        },
-      );
-    },
-  );
+  final AppRouterDelegate _routerDelegate = AppRouterDelegate();
 
   // This widget is the root of your application.
   @override
@@ -40,6 +20,38 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Playground',
       routerDelegate: _routerDelegate,
       routeInformationParser: AppRouteInformationParser(),
+      theme: ThemeData.light().overrides(),
+      darkTheme: ThemeData.dark().overrides(),
+    );
+  }
+}
+
+extension on ThemeData {
+  ThemeData overrides() {
+    return this.copyWith(
+      primaryTextTheme: textTheme.apply(displayColor: Colors.black),
+      // textTheme: textTheme.apply(displayColor: Colors.black),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.black),
+        elevation: 0,
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 48,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          textStyle: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.hovered))
+              return TextStyle(decoration: TextDecoration.underline);
+            return TextStyle();
+          }),
+        ),
+      ),
     );
   }
 }
