@@ -20,7 +20,7 @@ class Gallery extends StatelessWidget {
             ),
             body: Center(
               child: FutureBuilder<List<Photo>>(
-                future: model.fetchPhotos(),
+                future: model._fetchPhotosCache,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done)
                     return CircularProgressIndicator();
@@ -64,6 +64,7 @@ class Gallery extends StatelessWidget {
                 height: 192,
                 loadingBuilder: (context, child, loadingProgress) {
                   return child;
+                  // パフォーマンス悪い
                   // return loadingProgress == null
                   //     ? Container(
                   //         clipBehavior: Clip.hardEdge,
@@ -118,9 +119,13 @@ class Gallery extends StatelessWidget {
 }
 
 class GalleryModel extends ChangeNotifier {
-  GalleryModel();
+  GalleryModel() {
+    _fetchPhotosCache = fetchPhotos();
+  }
 
-  Future<List<Photo>> fetchPhotos() {
+  Future<List<Photo>>? _fetchPhotosCache;
+
+  Future<List<Photo>> fetchPhotos() async {
     final completer = Completer<List<Photo>>();
     FirebaseFirestore.instance.collection('photos').snapshots().listen((event) {
       final photos = event.docs.map((e) => Photo(data: e.data())).toList();
