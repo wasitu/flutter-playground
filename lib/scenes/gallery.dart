@@ -60,24 +60,24 @@ class Gallery extends StatelessWidget {
               fit: BoxFit.cover,
               width: 192,
               height: 192,
-              loadingBuilder: (context, child, loadingProgress) {
-                return loadingProgress == null
-                    ? Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
-                              spreadRadius: 2,
-                              blurRadius: 4,
-                              offset: Offset(2, 2),
-                            ),
-                          ],
-                        ),
-                        child: child)
-                    : Container(child: child);
-              },
+              // loadingBuilder: (context, child, loadingProgress) {
+              //   return loadingProgress == null
+              //       ? Container(
+              //           clipBehavior: Clip.hardEdge,
+              //           decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(16),
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: Colors.grey.withOpacity(0.4),
+              //                 spreadRadius: 2,
+              //                 blurRadius: 4,
+              //                 offset: Offset(2, 2),
+              //               ),
+              //             ],
+              //           ),
+              //           child: child)
+              //       : Container(child: child);
+              // },
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   width: 192,
