@@ -5,6 +5,7 @@ import 'package:flutter_playground/scenes/detail.dart';
 import 'package:flutter_playground/scenes/gallery.dart';
 import 'package:flutter_playground/scenes/home.dart';
 import 'package:flutter_playground/scenes/unknown.dart';
+import 'package:flutter_playground/utility/custom_scroll_behavior.dart';
 
 class AppRouterDelegate extends RouterDelegate<String>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<String> {
@@ -22,23 +23,26 @@ class AppRouterDelegate extends RouterDelegate<String>
     return MaterialPageRoute(
       settings: settings,
       builder: (BuildContext context) {
-        return Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Column(
-            children: [
-              SizedBox(height: 16),
-              Flexible(
-                child: Builder(builder: (context) {
-                  if (settings.name == '/') return Home();
-                  if (settings.name == 'gallery') return Gallery();
-                  if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
-                    final id = settings.name?.split('#').last;
-                    return Detail(id: id);
-                  }
-                  return Unknown();
-                }),
-              ),
-            ],
+        return ScrollConfiguration(
+          behavior: CustomScrollBehavior(),
+          child: Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                Flexible(
+                  child: Builder(builder: (context) {
+                    if (settings.name == '/') return Home();
+                    if (settings.name == 'gallery') return Gallery();
+                    if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
+                      final id = settings.name?.split('#').last;
+                      return Detail(id: id);
+                    }
+                    return Unknown();
+                  }),
+                ),
+              ],
+            ),
           ),
         );
       },
