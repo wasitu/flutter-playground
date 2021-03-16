@@ -18,25 +18,28 @@ class Gallery extends StatelessWidget {
             appBar: AppBar(
               title: Text('GALLERY'),
             ),
-            body: Center(
-              child: FutureBuilder<List<Photo>>(
-                future: model._fetchPhotosCache,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return CircularProgressIndicator();
-                  return SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 16.0),
-                    child: Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: snapshot.data?.map((e) {
-                            return buildPhotoWidget(e);
-                          }).toList() ??
-                          [],
-                    ),
-                  );
-                },
+            body: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Center(
+                child: FutureBuilder<List<Photo>>(
+                  future: model._fetchPhotosCache,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done)
+                      return CircularProgressIndicator();
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16.0, horizontal: 16.0),
+                      child: Wrap(
+                        spacing: 16,
+                        runSpacing: 16,
+                        children: snapshot.data?.map((e) {
+                              return buildPhotoWidget(e);
+                            }).toList() ??
+                            [],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           );
@@ -120,7 +123,9 @@ class Gallery extends StatelessWidget {
 
 class GalleryModel extends ChangeNotifier {
   GalleryModel() {
-    _fetchPhotosCache = fetchPhotos();
+    // Avoid transition gets slow
+    _fetchPhotosCache =
+        Future.delayed(Duration(seconds: 1)).then((value) => fetchPhotos());
   }
 
   Future<List<Photo>>? _fetchPhotosCache;
