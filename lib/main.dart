@@ -29,9 +29,11 @@ class MyApp extends StatelessWidget {
 extension on ThemeData {
   ThemeData overrides() {
     return this.copyWith(
+      primaryColor: Colors.white,
       primaryTextTheme: textTheme.apply(displayColor: Colors.black),
       // textTheme: textTheme.apply(displayColor: Colors.black),
       appBarTheme: AppBarTheme(
+        centerTitle: false,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -42,6 +44,9 @@ extension on ThemeData {
           ),
         ),
       ),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.transparent),

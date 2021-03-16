@@ -22,13 +22,25 @@ class AppRouterDelegate extends RouterDelegate<String>
     return MaterialPageRoute(
       settings: settings,
       builder: (BuildContext context) {
-        if (settings.name == '/') return Home();
-        if (settings.name == 'gallery') return Gallery();
-        if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
-          final id = settings.name?.split('#').last;
-          return Detail(id: id);
-        }
-        return Unknown();
+        return Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
+            children: [
+              SizedBox(height: 16),
+              Flexible(
+                child: Builder(builder: (context) {
+                  if (settings.name == '/') return Home();
+                  if (settings.name == 'gallery') return Gallery();
+                  if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
+                    final id = settings.name?.split('#').last;
+                    return Detail(id: id);
+                  }
+                  return Unknown();
+                }),
+              ),
+            ],
+          ),
+        );
       },
     );
   };

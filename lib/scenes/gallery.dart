@@ -68,9 +68,9 @@ class Gallery extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 6,
+                              color: Colors.grey.withOpacity(0.4),
+                              spreadRadius: 2,
+                              blurRadius: 4,
                               offset: Offset(2, 2),
                             ),
                           ],
@@ -80,8 +80,26 @@ class Gallery extends StatelessWidget {
               },
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: Colors.white,
-                  child: Text(error.toString()),
+                  width: 192,
+                  height: 192,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    // ２重描画されてそう
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text('ERROR',
+                        style: TextStyle(color: Colors.grey.withOpacity(0.5))),
+                  ),
                 );
               },
             ),
