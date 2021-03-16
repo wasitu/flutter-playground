@@ -55,53 +55,58 @@ class Gallery extends StatelessWidget {
         },
         child: Column(
           children: [
-            Image.network(
-              e.imageLink,
-              fit: BoxFit.cover,
-              width: 192,
-              height: 192,
-              // loadingBuilder: (context, child, loadingProgress) {
-              //   return loadingProgress == null
-              //       ? Container(
-              //           clipBehavior: Clip.hardEdge,
-              //           decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.circular(16),
-              //             boxShadow: [
-              //               BoxShadow(
-              //                 color: Colors.grey.withOpacity(0.4),
-              //                 spreadRadius: 2,
-              //                 blurRadius: 4,
-              //                 offset: Offset(2, 2),
-              //               ),
-              //             ],
-              //           ),
-              //           child: child)
-              //       : Container(child: child);
-              // },
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: 192,
-                  height: 192,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    // ２重描画されてそう
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 4,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text('ERROR',
-                        style: TextStyle(color: Colors.grey.withOpacity(0.5))),
-                  ),
-                );
-              },
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                e.imageLink,
+                fit: BoxFit.cover,
+                width: 192,
+                height: 192,
+                // パフォーマンス悪い
+                // loadingBuilder: (context, child, loadingProgress) {
+                //   return loadingProgress == null
+                //       ? Container(
+                //           clipBehavior: Clip.hardEdge,
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(16),
+                //             boxShadow: [
+                //               BoxShadow(
+                //                 color: Colors.grey.withOpacity(0.4),
+                //                 spreadRadius: 2,
+                //                 blurRadius: 4,
+                //                 offset: Offset(2, 2),
+                //               ),
+                //             ],
+                //           ),
+                //           child: child)
+                //       : Container(child: child);
+                // },
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 192,
+                    height: 192,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      // ２重描画されてそう
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(2, 2),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text('ERROR',
+                          style:
+                              TextStyle(color: Colors.grey.withOpacity(0.5))),
+                    ),
+                  );
+                },
+              ),
             ),
             SizedBox(height: 8),
             Text(e.photographer),
