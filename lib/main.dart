@@ -28,19 +28,22 @@ class MyApp extends StatelessWidget {
 
 extension on ThemeData {
   ThemeData overrides() {
+    final colors = ThemeColor(this.brightness);
     return this.copyWith(
       primaryColor: Colors.white,
-      primaryTextTheme: textTheme.apply(displayColor: Colors.black),
+      primaryTextTheme: textTheme.apply(
+        displayColor: colors.label,
+      ),
       // textTheme: textTheme.apply(displayColor: Colors.black),
       appBarTheme: AppBarTheme(
         centerTitle: false,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: colors.label),
         elevation: 0,
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 48,
-            color: Colors.black,
+            color: colors.label,
           ),
         ),
       ),
@@ -59,4 +62,17 @@ extension on ThemeData {
       ),
     );
   }
+}
+
+class ThemeColor {
+  final Brightness _brightness;
+  Brightness get brightness => _brightness;
+  const ThemeColor(this._brightness);
+
+  static ThemeColor of(BuildContext context, {bool sample = false}) {
+    return ThemeColor(Theme.of(context).brightness);
+  }
+
+  Color get label =>
+      brightness == Brightness.light ? Colors.black : Colors.white;
 }
