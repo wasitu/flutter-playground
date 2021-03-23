@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'routing/app_route_information_parser.dart';
 import 'routing/app_router_delegate.dart';
+import 'utility/theme_color.dart';
 
 void main() async {
   await Firebase.initializeApp();
@@ -30,20 +31,19 @@ extension on ThemeData {
   ThemeData overrides() {
     final colors = ThemeColor(this.brightness);
     return this.copyWith(
-      primaryColor: Colors.white,
       primaryTextTheme: textTheme.apply(
-        displayColor: colors.label,
+        displayColor: colors.label2,
       ),
-      // textTheme: textTheme.apply(displayColor: Colors.black),
+      textTheme: textTheme.apply(),
       appBarTheme: AppBarTheme(
         centerTitle: false,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: colors.label),
+        iconTheme: IconThemeData(color: colors.label2),
         elevation: 0,
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 48,
-            color: colors.label,
+            color: colors.label2,
           ),
         ),
       ),
@@ -62,17 +62,4 @@ extension on ThemeData {
       ),
     );
   }
-}
-
-class ThemeColor {
-  final Brightness _brightness;
-  Brightness get brightness => _brightness;
-  const ThemeColor(this._brightness);
-
-  static ThemeColor of(BuildContext context, {bool sample = false}) {
-    return ThemeColor(Theme.of(context).brightness);
-  }
-
-  Color get label =>
-      brightness == Brightness.light ? Colors.black : Colors.white;
 }
