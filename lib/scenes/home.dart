@@ -30,9 +30,9 @@ class Home extends StatelessWidget {
             ),
             buildMenuItem(
               context: context,
-              text: 'FIREBASE TEST',
+              text: 'ANIMATED BACKGROUND TEST',
               callback: () {
-                AppRouterDelegate.of(context).push('firebase_test');
+                AppRouterDelegate.of(context).push('animated_background_test');
               },
             ),
             buildMenuItem(

@@ -16,7 +16,10 @@ class Gallery extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('GALLERY'),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text('GALLERY'),
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.only(top: 8.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/routing/app_page.dart';
+import 'package:flutter_playground/scenes/animated_background_test.dart';
 import 'package:flutter_playground/scenes/detail.dart';
 import 'package:flutter_playground/scenes/gallery.dart';
 import 'package:flutter_playground/scenes/home.dart';
@@ -26,14 +27,14 @@ class AppRouterDelegate extends RouterDelegate<String>
         return ScrollConfiguration(
           behavior: CustomScrollBehavior(),
           child: Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
             child: Column(
               children: [
-                SizedBox(height: 16),
                 Flexible(
                   child: Builder(builder: (context) {
                     if (settings.name == '/') return Home();
                     if (settings.name == 'gallery') return Gallery();
+                    if (settings.name == 'animated_background_test')
+                      return AnimatedBackgroundTest();
                     if (RegExp(r'details#\S+$').hasMatch(settings.name ?? '')) {
                       final id = settings.name?.split('#').last;
                       return Detail(id: id);
