@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_playground/scenes/gallery.dart';
+import 'package:flutter_playground/scenes/home.dart';
+import 'package:flutter_playground/scenes/unknown.dart';
+import 'package:get/route_manager.dart';
 
-import 'routing/app_route_information_parser.dart';
-import 'routing/app_router_delegate.dart';
+import 'scenes/bbs.dart';
+import 'scenes/detail.dart';
 import 'utility/theme_color.dart';
 
 void main() async {
@@ -12,17 +16,20 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final AppRouterDelegate _routerDelegate = AppRouterDelegate();
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
       title: 'Flutter Playground',
-      routerDelegate: _routerDelegate,
-      routeInformationParser: AppRouteInformationParser(),
       theme: ThemeData.light().overrides(),
       darkTheme: ThemeData.dark().overrides(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Home()),
+        GetPage(name: '/gallery', page: () => Gallery()),
+        GetPage(name: '/detail', page: () => Detail()),
+        GetPage(name: '/bbs', page: () => BBS()),
+      ],
+      unknownRoute: GetPage(name: '/unknown', page: () => Unknown()),
     );
   }
 }
@@ -53,11 +60,14 @@ extension on ThemeData {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          textStyle: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.hovered))
-              return TextStyle(decoration: TextDecoration.underline);
-            return TextStyle();
-          }),
+          textStyle: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.hovered))
+                return TextStyle(decoration: TextDecoration.underline);
+              return TextStyle();
+            },
+          ),
+          minimumSize: MaterialStateProperty.all(Size.zero),
         ),
       ),
     );

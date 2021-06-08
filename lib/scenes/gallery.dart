@@ -3,47 +3,42 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Gallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<GalleryModel>(
-      create: (_) => GalleryModel(),
-      child: Consumer<GalleryModel>(
-        builder: (context, model, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('GALLERY'),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Center(
-                child: FutureBuilder<List<Photo>>(
-                  future: model._fetchPhotosCache,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done)
-                      return CircularProgressIndicator();
-                    return SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 16.0),
-                      child: Wrap(
-                        spacing: 16,
-                        runSpacing: 16,
-                        children: snapshot.data?.map((e) {
-                              return buildPhotoWidget(e);
-                            }).toList() ??
-                            [],
-                      ),
-                    );
-                  },
+    final controller = Get.put(GalleryController());
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('GALLERY'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Center(
+          child: FutureBuilder<List<Photo>>(
+            future: controller._fetchPhotosCache,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done)
+                return CircularProgressIndicator();
+              return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 16.0),
+                child: Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  children: snapshot.data?.map((e) {
+                        return buildPhotoWidget(e);
+                      }).toList() ??
+                      [],
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -104,8 +99,8 @@ class Gallery extends StatelessWidget {
   }
 }
 
-class GalleryModel extends ChangeNotifier {
-  GalleryModel() {
+class GalleryController extends GetxController {
+  GalleryController() {
     // Avoid transition gets slow
     _fetchPhotosCache = Future.delayed(Duration(milliseconds: 500))
         .then((value) => fetchPhotos());

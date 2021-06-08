@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/routing/app_router_delegate.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -25,21 +25,28 @@ class Home extends StatelessWidget {
               context: context,
               text: 'TRANSITION TEST',
               callback: () {
-                AppRouterDelegate.of(context).push('details#1');
+                Get.toNamed('/detail?id=10');
               },
             ),
             buildMenuItem(
               context: context,
-              text: 'FIREBASE TEST',
+              text: 'UNKNOWN',
               callback: () {
-                AppRouterDelegate.of(context).push('firebase_test');
+                Get.toNamed('/abc');
               },
             ),
             buildMenuItem(
               context: context,
               text: 'GALLERY',
               callback: () {
-                AppRouterDelegate.of(context).push('gallery');
+                Get.toNamed('/gallery');
+              },
+            ),
+            buildMenuItem(
+              context: context,
+              text: 'BBS',
+              callback: () {
+                Get.toNamed('/bbs');
               },
             ),
           ],
@@ -48,7 +55,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Row buildMenuItem(
+  Widget buildMenuItem(
       {required BuildContext context,
       required String text,
       VoidCallback? callback}) {
