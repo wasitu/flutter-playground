@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_playground/scenes/gallery.dart';
+import 'package:flutter_playground/scenes/home.dart';
+import 'package:flutter_playground/scenes/unknown.dart';
+import 'package:flutter_playground/widget/animated_background.dart';
+import 'package:get/route_manager.dart';
 
-import 'routing/app_route_information_parser.dart';
-import 'routing/app_router_delegate.dart';
+import 'scenes/animated_background_test.dart';
+import 'scenes/bbs.dart';
+import 'scenes/detail.dart';
+import 'utility/theme_color.dart';
 
 void main() async {
   await Firebase.initializeApp();
@@ -11,17 +18,24 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final AppRouterDelegate _routerDelegate = AppRouterDelegate();
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
       title: 'Flutter Playground',
-      routerDelegate: _routerDelegate,
-      routeInformationParser: AppRouteInformationParser(),
       theme: ThemeData.light().overrides(),
       darkTheme: ThemeData.dark().overrides(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Home()),
+        GetPage(name: '/gallery', page: () => Gallery()),
+        GetPage(name: '/detail', page: () => Detail()),
+        GetPage(name: '/bbs', page: () => BBS()),
+        GetPage(
+          name: '/animated_background_test',
+          page: () => AnimatedBackgroundTest(),
+        )
+      ],
+      unknownRoute: GetPage(name: '/unknown', page: () => Unknown()),
     );
   }
 }
@@ -30,20 +44,19 @@ extension on ThemeData {
   ThemeData overrides() {
     final colors = ThemeColor(this.brightness);
     return this.copyWith(
-      primaryColor: Colors.white,
       primaryTextTheme: textTheme.apply(
-        displayColor: colors.label,
+        displayColor: colors.label2,
       ),
-      // textTheme: textTheme.apply(displayColor: Colors.black),
+      textTheme: textTheme.apply(),
       appBarTheme: AppBarTheme(
         centerTitle: false,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: colors.label),
+        iconTheme: IconThemeData(color: colors.label2),
         elevation: 0,
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 48,
-            color: colors.label,
+            color: colors.label2,
           ),
         ),
       ),
@@ -53,26 +66,16 @@ extension on ThemeData {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          textStyle: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.hovered))
-              return TextStyle(decoration: TextDecoration.underline);
-            return TextStyle();
-          }),
+          textStyle: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.hovered))
+                return TextStyle(decoration: TextDecoration.underline);
+              return TextStyle();
+            },
+          ),
+          minimumSize: MaterialStateProperty.all(Size.zero),
         ),
       ),
     );
   }
-}
-
-class ThemeColor {
-  final Brightness _brightness;
-  Brightness get brightness => _brightness;
-  const ThemeColor(this._brightness);
-
-  static ThemeColor of(BuildContext context, {bool sample = false}) {
-    return ThemeColor(Theme.of(context).brightness);
-  }
-
-  Color get label =>
-      brightness == Brightness.light ? Colors.black : Colors.white;
 }

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/routing/app_router_delegate.dart';
+import 'package:get/get.dart';
 
 class Detail extends StatelessWidget {
   final String? id;
 
-  Detail({
-    required this.id,
-  });
+  Detail() : this.id = Get.parameters['id'];
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +18,13 @@ class Detail extends StatelessWidget {
             TextButton(
               child: Text('DETAIL 2'),
               onPressed: () {
-                AppRouterDelegate.of(context).push('details#2');
+                Get.toNamed('/detail?id=2');
               },
             ),
             TextButton(
               child: Text('POP'),
               onPressed: () {
-                AppRouterDelegate.of(context).popRoute();
+                Get.back();
               },
             ),
           ],
