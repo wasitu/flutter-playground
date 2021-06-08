@@ -3,20 +3,21 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "manifest.json": "b0455a8e72de63d4d4921d2842e436c1",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/NOTICES": "f99ac529bd85b87b783ebc9542780527",
-"assets/AssetManifest.json": "2efbb41d7877d10aac9d091f58ccd7b9",
+  "favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"index.html": "23ed11e7426bde240d0f726bd880b963",
+"/": "23ed11e7426bde240d0f726bd880b963",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"main.dart.js": "30825e6be435f79647d1ee90cb91b002",
-"index.html": "9ebde3b05d335d30a7e79a7b73c2f785",
-"/": "9ebde3b05d335d30a7e79a7b73c2f785",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf": "32be0c4c86773ba5c9f7791e69964585",
+"assets/FontManifest.json": "9e0649c90f16a7be3d51ab27d6089604",
+"assets/AssetManifest.json": "1142beb922fe3c70e6718d8c4c605bd9",
+"assets/NOTICES": "6e3043c55434ad10d7e91c0f21bed450",
+"main.dart.js": "712b1551229198458a6c295966f02ab7",
+"version.json": "a03d6749df8f2634cd0b77d669d121db",
+"firebase_config.js": "0410077490287eefa06ce74621ccb02c",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"firebase_config.js": "0410077490287eefa06ce74621ccb02c",
-"version.json": "a03d6749df8f2634cd0b77d669d121db"
+"manifest.json": "b0455a8e72de63d4d4921d2842e436c1"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -34,7 +35,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
