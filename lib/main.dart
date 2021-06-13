@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/animated_background_test',
           page: () => AnimatedBackgroundTest(),
-        )
+        ),
       ],
       unknownRoute: GetPage(name: '/unknown', page: () => Unknown()),
     );

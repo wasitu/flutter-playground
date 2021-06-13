@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/scenes/signin.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
@@ -47,6 +48,19 @@ class Home extends StatelessWidget {
               text: 'ANIMATED BACKGROUND TEST',
               callback: () {
                 Get.toNamed('/animated_background_test');
+              },
+            ),
+            buildMenuItem(
+              context: context,
+              text: 'SIGNIN',
+              callback: () {
+                navigator?.push(
+                  GetPageRoute(
+                    settings: RouteSettings(name: '/signin'),
+                    page: () => Signin(),
+                    fullscreenDialog: true,
+                  ),
+                );
               },
             ),
             buildMenuItem(
