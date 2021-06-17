@@ -14,14 +14,20 @@ extension EBuildContext on BuildContext {
       child: TextButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(padding ?? EdgeInsets.all(12)),
-          overlayColor: MaterialStateProperty.all(
-            isEnabled ? Theme.of(this).splashColor : Colors.transparent,
-          ),
+          overlayColor: MaterialStateProperty.resolveWith((states) {
+            if (isEnabled && states.contains(MaterialState.pressed))
+              return Theme.of(this).splashColor;
+            return Colors.transparent;
+          }),
+          // MaterialStateProperty.all(
+          //   isEnabled ? Theme.of(this).splashColor : Colors.transparent,
+          // ),
           backgroundColor: MaterialStateProperty.all(
             isEnabled
-                ? Theme.of(this).primaryColor
+                ? Theme.of(this).accentColor
                 : Theme.of(this).disabledColor,
           ),
+          textStyle: MaterialStateProperty.all(TextStyle()),
         ),
         onPressed: onPressed,
         child: Stack(

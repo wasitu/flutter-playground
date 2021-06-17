@@ -60,11 +60,9 @@ extension on ThemeData {
           ),
         ),
       ),
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      hoverColor: Colors.transparent,
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all(this.accentColor),
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           textStyle: MaterialStateProperty.resolveWith(
             (states) {
