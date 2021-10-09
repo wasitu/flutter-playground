@@ -24,7 +24,7 @@ extension EBuildContext on BuildContext {
           // ),
           backgroundColor: MaterialStateProperty.all(
             isEnabled
-                ? Theme.of(this).accentColor
+                ? Theme.of(this).colorScheme.secondary
                 : Theme.of(this).disabledColor,
           ),
           textStyle: MaterialStateProperty.all(TextStyle()),

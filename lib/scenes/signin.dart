@@ -64,7 +64,9 @@ class Signin extends StatelessWidget {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
@@ -96,7 +98,9 @@ class Signin extends StatelessWidget {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
@@ -143,7 +147,9 @@ class Signin extends StatelessWidget {
                                     .textTheme
                                     .caption
                                     ?.copyWith(
-                                        color: Theme.of(context).accentColor),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary),
                               ),
                             ),
                           ],

@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_playground/scenes/gallery.dart';
 import 'package:flutter_playground/scenes/home.dart';
 import 'package:flutter_playground/scenes/unknown.dart';
-import 'package:flutter_playground/widget/animated_background.dart';
 import 'package:get/route_manager.dart';
 
 import 'scenes/animated_background_test.dart';
@@ -24,9 +23,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Playground',
       theme: ThemeData.light().overrides(),
       darkTheme: ThemeData.dark().overrides(),
-      initialRoute: '/',
+      initialRoute: '/home',
       getPages: [
-        GetPage(name: '/', page: () => Home()),
+        GetPage(name: '/home', page: () => Home()),
         GetPage(name: '/gallery', page: () => Gallery()),
         GetPage(name: '/detail', page: () => Detail()),
         GetPage(name: '/bbs', page: () => BBS()),
@@ -53,16 +52,20 @@ extension on ThemeData {
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: colors.label2),
         elevation: 0,
-        textTheme: TextTheme(
-          title: TextStyle(
-            fontSize: 48,
-            color: colors.label2,
-          ),
+        titleTextStyle: TextStyle(
+          fontSize: 48,
+          color: colors.label2,
         ),
+        // textTheme: TextTheme(
+        //   title: TextStyle(
+        //     fontSize: 48,
+        //     color: colors.label2,
+        //   ),
+        // ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(this.accentColor),
+          foregroundColor: MaterialStateProperty.all(colorScheme.secondary),
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           textStyle: MaterialStateProperty.resolveWith(
             (states) {

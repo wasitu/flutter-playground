@@ -29,7 +29,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.2
   simple_animations: ^3.0.3
-  flutter_neumorphic: ^3.1.0
+  flutter_neumorphic:
+    git:
+      url: https://github.com/tsvillain/Flutter-Neumorphic.git
   uuid: ^3.0.2
   get: ^4.1.4
 
