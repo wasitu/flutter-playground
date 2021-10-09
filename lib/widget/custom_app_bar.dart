@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends AppBar {
-  CustomAppBar({required String title})
+  CustomAppBar({Key? key, required String title})
       : super(
+            key: key,
             title: Padding(
-                padding: EdgeInsets.only(top: 16.0), child: Text(title)));
+                padding: const EdgeInsets.only(top: 16.0), child: Text(title)));
 }

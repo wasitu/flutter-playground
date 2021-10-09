@@ -3,6 +3,8 @@ import 'package:flutter_playground/scenes/signin.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class Home extends StatelessWidget {
                 'FLUTTER PLAYGROUND',
                 style: Theme.of(context).textTheme.headline2,
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               // Text(
               //   'TEST SCENES',
               //   style: Theme.of(context).textTheme.headline6,
@@ -57,8 +59,8 @@ class Home extends StatelessWidget {
                 callback: () {
                   navigator?.push(
                     GetPageRoute(
-                      settings: RouteSettings(name: '/signin'),
-                      page: () => Signin(),
+                      settings: const RouteSettings(name: '/signin'),
+                      page: () => const Signin(),
                       fullscreenDialog: true,
                     ),
                   );
@@ -85,7 +87,7 @@ class Home extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(' - '),
+        const Text(' - '),
         Flexible(
           child: TextButton(
             style: Theme.of(context).textButtonTheme.style,

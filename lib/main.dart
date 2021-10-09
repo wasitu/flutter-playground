@@ -13,10 +13,12 @@ import 'utility/theme_color.dart';
 
 void main() async {
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -25,24 +27,24 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().overrides(),
       initialRoute: '/home',
       getPages: [
-        GetPage(name: '/home', page: () => Home()),
-        GetPage(name: '/gallery', page: () => Gallery()),
+        GetPage(name: '/home', page: () => const Home()),
+        GetPage(name: '/gallery', page: () => const Gallery()),
         GetPage(name: '/detail', page: () => Detail()),
-        GetPage(name: '/bbs', page: () => BBS()),
+        GetPage(name: '/bbs', page: () => const BBS()),
         GetPage(
           name: '/animated_background_test',
-          page: () => AnimatedBackgroundTest(),
+          page: () => const AnimatedBackgroundTest(),
         ),
       ],
-      unknownRoute: GetPage(name: '/unknown', page: () => Unknown()),
+      unknownRoute: GetPage(name: '/unknown', page: () => const Unknown()),
     );
   }
 }
 
 extension on ThemeData {
   ThemeData overrides() {
-    final colors = ThemeColor(this.brightness);
-    return this.copyWith(
+    final colors = ThemeColor(brightness);
+    return copyWith(
       primaryTextTheme: textTheme.apply(
         displayColor: colors.label2,
       ),
@@ -69,9 +71,10 @@ extension on ThemeData {
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           textStyle: MaterialStateProperty.resolveWith(
             (states) {
-              if (states.contains(MaterialState.hovered))
-                return TextStyle(decoration: TextDecoration.underline);
-              return TextStyle();
+              if (states.contains(MaterialState.hovered)) {
+                return const TextStyle(decoration: TextDecoration.underline);
+              }
+              return const TextStyle();
             },
           ),
           minimumSize: MaterialStateProperty.all(Size.zero),

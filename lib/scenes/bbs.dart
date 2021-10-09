@@ -8,6 +8,8 @@ import 'package:uuid/uuid.dart';
 import 'package:get/get.dart';
 
 class BBS extends StatelessWidget {
+  const BBS({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BBSController());
@@ -23,7 +25,7 @@ class BBS extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Container(
-            constraints: BoxConstraints(maxWidth: 480),
+            constraints: const BoxConstraints(maxWidth: 480),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +39,8 @@ class BBS extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState !=
                                 ConnectionState.done) {
-                              return Center(child: CircularProgressIndicator());
+                              return const Center(
+                                  child: CircularProgressIndicator());
                             }
                             return Obx(
                               () => Scrollbar(
@@ -48,7 +51,7 @@ class BBS extends StatelessWidget {
                                   itemCount: controller.contributes.length,
                                   itemBuilder: (context, index) {
                                     final c = controller.contributes[index];
-                                    print(c.name + c.message);
+                                    debugPrint(c.name + c.message);
                                     return Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 16.0),
@@ -92,7 +95,7 @@ class BBS extends StatelessWidget {
                         children: [
                           NeumorphicButton(
                             style: neumorphicStyle,
-                            child: Text('POST'),
+                            child: const Text('POST'),
                             onPressed: () {
                               controller.post();
                             },
@@ -102,7 +105,7 @@ class BBS extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Neumorphic(
                   style: neumorphicStyle,
                   child: Padding(
@@ -161,12 +164,13 @@ class BBSController extends GetxController {
   final TextEditingController nameEditingController = TextEditingController();
   final TextEditingController messageEditingController =
       TextEditingController();
-  final String uuid = Uuid().v4();
+  final String uuid = const Uuid().v4();
 
   get defaultName => uuid.substring(0, 8);
+  // ignore: invalid_use_of_protected_member
   get contributes => _contributes.value;
 
-  var _contributes = <Contribute>[].obs;
+  final _contributes = <Contribute>[].obs;
 
   Future<List<Contribute>>? _fetchContributesCache;
   get fetchContributesCache => _fetchContributesCache;
@@ -176,7 +180,7 @@ class BBSController extends GetxController {
 
   BBSController() {
     // Avoid transition gets slow
-    _fetchContributesCache = Future.delayed(Duration(milliseconds: 500))
+    _fetchContributesCache = Future.delayed(const Duration(milliseconds: 500))
         .then((value) => fetchContributes());
   }
 

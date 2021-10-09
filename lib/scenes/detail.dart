@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 class Detail extends StatelessWidget {
   final String? id;
 
-  Detail({String? id}) : this.id = id ?? Get.parameters['id'];
+  Detail({Key? key, String? id})
+      : id = id ?? Get.parameters['id'],
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +18,24 @@ class Detail extends StatelessWidget {
           children: [
             Text('Viewing details for item $id'),
             TextButton(
-              child: Text('DETAIL 2'),
+              child: const Text('DETAIL 2'),
               onPressed: () {
                 Get.toNamed('/detail?id=2');
               },
             ),
             TextButton(
-              child: Text('PUSH TEST'),
+              child: const Text('PUSH TEST'),
               onPressed: () {
                 navigator?.push(
                   GetPageRoute(
-                    settings: RouteSettings(name: '/detail?id=22'),
+                    settings: const RouteSettings(name: '/detail?id=22'),
                     page: () => Detail(),
                   ),
                 );
               },
             ),
             TextButton(
-              child: Text('POP'),
+              child: const Text('POP'),
               onPressed: () {
                 Get.back();
               },

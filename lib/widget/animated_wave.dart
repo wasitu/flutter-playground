@@ -10,13 +10,15 @@ class AnimatedWave extends StatelessWidget {
   final double speed;
   final double offset;
 
-  AnimatedWave({required this.height, required this.speed, this.offset = 0.0});
+  const AnimatedWave(
+      {Key? key, required this.height, required this.speed, this.offset = 0.0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Container(
+        return SizedBox(
           height: height,
           width: constraints.biggest.width,
           child: LoopAnimation(

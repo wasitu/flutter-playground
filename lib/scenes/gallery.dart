@@ -10,6 +10,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Gallery extends StatelessWidget {
+  const Gallery({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(GalleryController());
@@ -21,8 +23,9 @@ class Gallery extends StatelessWidget {
           child: FutureBuilder<List<Photo>>(
             future: controller._fetchPhotosCache,
             builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done)
-                return CircularProgressIndicator();
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const CircularProgressIndicator();
+              }
               return SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                     vertical: 16.0, horizontal: 16.0),
@@ -76,7 +79,7 @@ class Gallery extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 4,
-                          offset: Offset(2, 2),
+                          offset: const Offset(2, 2),
                         ),
                       ],
                     ),
@@ -89,7 +92,7 @@ class Gallery extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(e.photographer),
           ],
         ),
@@ -101,7 +104,7 @@ class Gallery extends StatelessWidget {
 class GalleryController extends GetxController {
   GalleryController() {
     // Avoid transition gets slow
-    _fetchPhotosCache = Future.delayed(Duration(milliseconds: 500))
+    _fetchPhotosCache = Future.delayed(const Duration(milliseconds: 500))
         .then((value) => fetchPhotos());
   }
 

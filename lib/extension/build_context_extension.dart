@@ -13,10 +13,12 @@ extension EBuildContext on BuildContext {
       widthFactor: fit ? null : 1.0,
       child: TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(padding ?? EdgeInsets.all(12)),
+          padding:
+              MaterialStateProperty.all(padding ?? const EdgeInsets.all(12)),
           overlayColor: MaterialStateProperty.resolveWith((states) {
-            if (isEnabled && states.contains(MaterialState.pressed))
+            if (isEnabled && states.contains(MaterialState.pressed)) {
               return Theme.of(this).splashColor;
+            }
             return Colors.transparent;
           }),
           // MaterialStateProperty.all(
@@ -27,7 +29,7 @@ extension EBuildContext on BuildContext {
                 ? Theme.of(this).colorScheme.secondary
                 : Theme.of(this).disabledColor,
           ),
-          textStyle: MaterialStateProperty.all(TextStyle()),
+          textStyle: MaterialStateProperty.all(const TextStyle()),
         ),
         onPressed: onPressed,
         child: Stack(
@@ -35,7 +37,7 @@ extension EBuildContext on BuildContext {
           children: [
             (() {
               if (isLoading) {
-                return SizedBox(
+                return const SizedBox(
                   width: 22,
                   height: 22,
                   child: CircularProgressIndicator(
@@ -44,7 +46,7 @@ extension EBuildContext on BuildContext {
                   ),
                 );
               }
-              return SizedBox();
+              return const SizedBox();
             })(),
             Padding(
               padding: const EdgeInsets.all(8.0),

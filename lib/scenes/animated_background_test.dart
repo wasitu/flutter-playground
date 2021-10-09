@@ -5,6 +5,8 @@ import 'package:flutter_playground/widget/animated_background.dart';
 import 'package:flutter_playground/widget/animated_wave.dart';
 
 class AnimatedBackgroundTest extends StatelessWidget {
+  const AnimatedBackgroundTest({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,22 +17,22 @@ class AnimatedBackgroundTest extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Positioned.fill(child: AnimatedBackground()),
+          const Positioned.fill(child: AnimatedBackground()),
           onBottom(
-            AnimatedWave(
+            const AnimatedWave(
               height: 180,
               speed: 1.0,
             ),
           ),
           onBottom(
-            AnimatedWave(
+            const AnimatedWave(
               height: 120,
               speed: 0.9,
               offset: pi,
             ),
           ),
           onBottom(
-            AnimatedWave(
+            const AnimatedWave(
               height: 220,
               speed: 1.2,
               offset: pi / 2,

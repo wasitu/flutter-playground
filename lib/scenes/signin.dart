@@ -8,6 +8,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import '../extension/build_context_extension.dart';
 
 class Signin extends StatelessWidget {
+  const Signin({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SigninController());
@@ -20,7 +22,7 @@ class Signin extends StatelessWidget {
             child: SingleChildScrollView(
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 480),
+                  constraints: const BoxConstraints(maxWidth: 480),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -37,7 +39,7 @@ class Signin extends StatelessWidget {
                                   .headline5
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 56,
                             ),
                             Column(
@@ -47,14 +49,14 @@ class Signin extends StatelessWidget {
                                   'signin.mailaddress.label',
                                   style: Theme.of(context).textTheme.caption,
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextField(
                                   autocorrect: true,
                                   keyboardType: TextInputType.emailAddress,
                                   obscureText: false,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(12),
+                                    contentPadding: const EdgeInsets.all(12),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Theme.of(context).dividerColor,
@@ -77,18 +79,18 @@ class Signin extends StatelessWidget {
                                     controller.mail = value.trim();
                                   },
                                 ),
-                                SizedBox(height: 40),
+                                const SizedBox(height: 40),
                                 Text(
                                   'signin.password.label',
                                   style: Theme.of(context).textTheme.caption,
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextField(
                                   autocorrect: true,
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: true,
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(12),
+                                    contentPadding: const EdgeInsets.all(12),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Theme.of(context).dividerColor,
@@ -113,7 +115,7 @@ class Signin extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 40),
+                            const SizedBox(height: 40),
                             context.buildFlatButton(
                               title: 'signin.button.signin',
                               isEnabled: controller.isEnabled,
@@ -124,12 +126,12 @@ class Signin extends StatelessWidget {
                                 }
                                 controller.isLogining = true;
                                 FocusScope.of(context).unfocus();
-                                Future.delayed(Duration(seconds: 1))
+                                Future.delayed(const Duration(seconds: 1))
                                     .then((value) {
                                   navigator?.pushReplacement(
                                     GetPageRoute(
                                       routeName: '/',
-                                      page: () => Home(),
+                                      page: () => const Home(),
                                       transition: Transition.fadeIn,
                                       fullscreenDialog: true,
                                     ),
@@ -137,7 +139,7 @@ class Signin extends StatelessWidget {
                                 });
                               },
                             ),
-                            SizedBox(height: 32),
+                            const SizedBox(height: 32),
                             CupertinoButton(
                               padding: EdgeInsets.zero,
                               onPressed: () {},
@@ -170,13 +172,13 @@ class Signin extends StatelessWidget {
 class SigninController extends GetxController {
   SigninController();
 
-  RxString _mail = ''.obs;
+  final RxString _mail = ''.obs;
   String get mail => _mail.value;
   set mail(String value) {
     _mail.value = value;
   }
 
-  RxString _pass = ''.obs;
+  final RxString _pass = ''.obs;
   String get pass => _pass.value;
   set pass(String value) {
     _pass.value = value;
@@ -184,7 +186,7 @@ class SigninController extends GetxController {
 
   bool get isEnabled => !(_mail.isEmpty || _pass.isEmpty);
 
-  RxBool _isLogining = false.obs;
+  final RxBool _isLogining = false.obs;
   bool get isLogining => _isLogining.value;
   set isLogining(bool value) {
     _isLogining.value = value;

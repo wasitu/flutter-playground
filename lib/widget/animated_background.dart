@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 enum AnimationProps {
-  Color1,
-  Color2,
+  color1,
+  color2,
 }
 
 class AnimatedBackground extends StatelessWidget {
+  const AnimatedBackground({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final tweens = MultiTween<AnimationProps>()
       ..add(
-          AnimationProps.Color1,
-          ColorTween(begin: Color(0xffD38312), end: Colors.lightBlue.shade900),
-          Duration(seconds: 3))
+          AnimationProps.color1,
+          ColorTween(
+              begin: const Color(0xffD38312), end: Colors.lightBlue.shade900),
+          const Duration(seconds: 3))
       ..add(
-          AnimationProps.Color2,
-          ColorTween(begin: Color(0xffA83279), end: Colors.blue.shade600),
-          Duration(seconds: 3));
+          AnimationProps.color2,
+          ColorTween(begin: const Color(0xffA83279), end: Colors.blue.shade600),
+          const Duration(seconds: 3));
 
     return MirrorAnimation<MultiTweenValues<AnimationProps>>(
       tween: tweens, // Pass in tween
@@ -30,8 +33,8 @@ class AnimatedBackground extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                value.get(AnimationProps.Color1),
-                value.get(AnimationProps.Color2)
+                value.get(AnimationProps.color1),
+                value.get(AnimationProps.color2)
               ],
             ),
           ),
