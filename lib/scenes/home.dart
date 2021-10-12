@@ -68,6 +68,13 @@ class Home extends StatelessWidget {
               ),
               buildMenuItem(
                 context: context,
+                text: 'PASS GENERATOR',
+                callback: () {
+                  Get.toNamed('/pass_generator');
+                },
+              ),
+              buildMenuItem(
+                context: context,
                 text: 'UNKNOWN',
                 callback: () {
                   Get.toNamed('/abc');
