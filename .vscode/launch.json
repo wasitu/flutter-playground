@@ -12,6 +12,12 @@
                 "--web-renderer",
                 "html",
             ],
+        },
+        {
+            "name": "test",
+            "type": "dart",
+            "request": "launch",
+            "program": "./test/"
         }
     ]
 }

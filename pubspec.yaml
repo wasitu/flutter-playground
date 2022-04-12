@@ -37,7 +37,7 @@ dependencies:
   random_password_generator: ^0.2.1
   flutter_picker: ^2.0.2 
   shared_preferences: ^2.0.8
-
+  
   # 
   firebase_core: ^1.0.1
   firebase_storage: ^8.0.0

@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_playground/utility/theme_color.dart';
-import 'package:uuid/uuid.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class BBS extends StatelessWidget {
   const BBS({Key? key}) : super(key: key);
@@ -167,8 +166,7 @@ class BBSController extends GetxController {
   final String uuid = const Uuid().v4();
 
   get defaultName => uuid.substring(0, 8);
-  // ignore: invalid_use_of_protected_member
-  get contributes => _contributes.value;
+  get contributes => _contributes;
 
   final _contributes = <Contribute>[].obs;
 
